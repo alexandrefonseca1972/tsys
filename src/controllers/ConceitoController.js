@@ -45,6 +45,12 @@ class ConceitoController {
         await Conceito.remove({});
         return res.status(200).json({ msg: "Todos os registros foram apagados" });
     }
+     async update(req, res) {
+        const ConceitoUpdate = await Conceito.findByIdAndUpdate(
+            { _id: req.params.id }, { verbete: req.body.verbete, conceito: req.body.conceito, experiencia: req.body.experiencia, referencia: req.body.referencia, npat: req.body.npat },
+            { new: true, runValidators: true },
+        ); return res.json(ConceitoUpdate);
+    }
 }
 
 module.exports = new ConceitoController();
